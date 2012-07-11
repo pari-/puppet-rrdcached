@@ -1,0 +1,21 @@
+# /etc/default/rrdcached
+
+# 0: start rrdcached on boot, 1: do not start rrdcached on boot
+# default: 0
+DISABLE=<%= (!scope.lookupvar('rrdcached::service_ensure') || scope.lookupvar('rrdcached::service_ensure').casecmp('stopped') == 0) ? '1' : '0' %>
+
+# options to be passed to rrdcached
+# (do not specify -p <pidfile> - this is handled by the init script)
+# default: see /etc/init.d/rrdcached
+OPTS="-t <%= scope.lookupvar('rrdcached::write_threads') %> -w <%= scope.lookupvar('rrdcached::timeout') %> -z <%= scope.lookupvar('rrdcached::delay') %> -j <%= scope.lookupvar('rrdcached::journal_dir') %> -s <%= scope.lookupvar('rrdcached::gid') %> -m <%= scope.lookupvar('rrdcached::mode') %> -l <%= scope.lookupvar('rrdcached::listen') %> <%= scope.lookupvar('rrdcached::always_flush') ? '-F' : '' %> -b <%= scope.lookupvar('rrdcached::jump_dir') %>"
+
+# number of seconds to wait for rrdcached to shut down
+# (writing the data to disk may take some time;
+# tune this according to your setup)
+# default: 30
+MAXWAIT=<%= scope.lookupvar('rrdcached::maxwait') %>
+
+# 0: do not enable core-files, 1: enable core-files ... if rrdcached crashes
+# default: 0
+ENABLE_COREFILES=<%= scope.lookupvar('rrdcached::enable_corefiles') ? '1' : '0' %>
+
