@@ -17,7 +17,7 @@ class rrdcached::params {
   $maxwait = '30'
 
   case $::operatingsystem {
-    'Debian': {
+    'Debian', 'Ubuntu': {
       $package = [ 'rrdcached' ]
       $config = '/etc/default/rrdcached'
       $service_name = 'rrdcached'
