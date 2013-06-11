@@ -10,7 +10,5 @@ class rrdcached::package {
 
   package {$rrdcached::package:
     ensure          => $package_ensure,
-    provider        => 'aptbpo',
-    install_options => { '-t' => 'squeeze-backports' },
   }
 }
