@@ -16,15 +16,18 @@ class rrdcached (
   $jump_dir         = $rrdcached::params::jump_dir,
   $always_flush     = $rrdcached::params::always_flush,
   $enable_corefiles = $rrdcached::params::enable_corefiles,
-  $maxwait          = $rrdcached::params::maxwait
-) inherits rrdcached::params {
+  $maxwait          = $rrdcached::params::maxwait,
+  $restrict_writes  = $rrdcached::params::restrict_writes) inherits
+rrdcached::params {
+  class { 'rrdcached::package': }
 
-  class {'rrdcached::package':}
-  class {'rrdcached::config':}
-  class {'rrdcached::service':}
+  class { 'rrdcached::config': }
+
+  class { 'rrdcached::service': }
 
   if $ensure == 'present' {
-    Class['rrdcached::package'] -> Class['rrdcached::config'] ~> Class['rrdcached::service']
+    Class['rrdcached::package'] -> Class['rrdcached::config'] ~> Class['rrdcached::service'
+      ]
   } else {
     Class['rrdcached::service'] -> Class['rrdcached::package']
   }
