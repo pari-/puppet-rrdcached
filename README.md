@@ -22,6 +22,7 @@ or using the parameterized class with more options:
 		journal_dir      => '/var/lib/rrdcached/journal/',
 		mode             => '0660',
 		timeout          => '1800',
+		flushtimeout     => '3600',
 		delay            => '1800',
 		write_threads    => '4',
 		jump_dir         => '/var/lib/rrdcached/db/',
