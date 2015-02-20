@@ -11,6 +11,7 @@ class rrdcached (
   $journal_dir      = $rrdcached::params::journal_dir,
   $mode             = $rrdcached::params::mode,
   $timeout          = $rrdcached::params::timeout,
+  $flushtimeout     = $rrdcached::params::flushtimeout,
   $delay            = $rrdcached::params::delay,
   $write_threads    = $rrdcached::params::write_threads,
   $jump_dir         = $rrdcached::params::jump_dir,
